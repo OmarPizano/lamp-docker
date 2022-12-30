@@ -16,7 +16,6 @@ services:
     container_name: lamp_mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'toor'
-      MYSQL_DATABASE: 'app_data'
     ports:
       - 127.0.0.1:3306:3306
     volumes:
