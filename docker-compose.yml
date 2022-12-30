@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+
+  web_server:
+    container_name: lamp_php
+    build: .
+    ports:
+      - 127.0.0.1:80:80
+    volumes:
+      - ./www:/var/www/html
+    links:
+      - database
+
+  database:
+    image: mysql
+    container_name: lamp_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'toor'
+      MYSQL_DATABASE: 'app_data'
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - ./dbconf/dump:/docker-entrypoint-initdb.d
+      #- ./dbconf/etc:/etc/mysql/conf.d
+      - db_storage:/var/lib/mysql
+    restart: always
+
+volumes:
+  db_storage:
